@@ -3,27 +3,21 @@
         <!-- wwManager:start -->
         <wwSectionEditMenu v-bind:sectionCtrl="sectionCtrl"></wwSectionEditMenu>
         <!-- wwManager:end -->
-
         <wwObject class="background" v-bind:ww-object="section.data.background" ww-category="background"></wwObject>
-
         <div class="container">
-
             <div class="row text-center social-blocks-container">
                 <div class="block">
                     <div class="social-block" v-for="link in section.data.links" :key="link.uniqueId">
                         <div class="social-icon-container">
                             <wwObject class="social-icon" v-bind:ww-object="link.icon" ww-category="icon"></wwObject>
                         </div>
-
                         <wwObject class="social-text" v-bind:ww-object="link.text"></wwObject>
-
                         <!-- wwManager:start -->
                         <div v-show="editMode" class="edit-button-top-left" @click="removeLink(link)">
                             <i class="wwi wwi-delete" aria-hidden="true"></i>
                         </div>
                         <!-- wwManager:end -->
                     </div>
-                    
                     <!-- wwManager:start -->
                     <div v-show="editMode" class="add-link-container">
                         <div class="add-link" @click="addLink()">
@@ -33,15 +27,13 @@
                     <!-- wwManager:end -->
                 </div>
             </div>
-
         </div>
-
     </div>
 </template>
 
 <script>
 export default {
-    name: "social_A",
+    name: "__COMPONENT_NAME__",
     props: {
         sectionCtrl: Object
     },
@@ -52,9 +44,11 @@ export default {
         section() {
             return this.sectionCtrl.get();
         },
+        // wwManager:start
         editMode() {
             return this.sectionCtrl.getEditMode() == 'CONTENT'
         }
+        // wwManager:end
     },
     created() {
         //Initialize section data
@@ -77,6 +71,7 @@ export default {
                 text: wwLib.wwObject.getDefault({ type: 'ww-text' })
             }
         },
+        // wwManager:start
         removeLink(link) {
             this.section.data.links.splice(this.section.data.links.indexOf(link), 1);
             this.sectionCtrl.update(this.section);
@@ -85,6 +80,7 @@ export default {
             this.section.data.links.push(this.getNewLink());
             this.sectionCtrl.update(this.section);
         }
+        // wwManager:end
     }
 };
 </script>
