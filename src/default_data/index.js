@@ -2,10 +2,10 @@ module.exports = [
     {
         name: 'social_A',
         storeName: {
-            en_GB: "social_A"
+            en: "social_A"
         },
         storeDesc: {
-            en_GB: ""
+            en: ""
         }
     }
 ]
